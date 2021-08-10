@@ -1,0 +1,8 @@
+{
+    "require": {
+        "google/apiclient": "^2.0",
+        "google/analytics-data": "^0.5.1",
+        "google/cloud-storage": "^1.24",
+        "ext-bcmath": "*"   
+    }
+}
