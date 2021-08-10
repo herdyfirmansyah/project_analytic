@@ -14,6 +14,7 @@
 
 - Get Visitor 
 - http://localhost/project_analytics/index.php/get_visitor 
+- method : GET
 - param :
    - filter: country, city etc
    - dateStart
@@ -22,6 +23,7 @@
 
 - Get Title 
 - http://localhost/project_analytics/index.php/get_title 
+- method : GET
 - param :
    - dateStart 
    - endStart
@@ -29,6 +31,7 @@
 
 - Get Title   
 - http://localhost/project_analytics/index.php/get_path  
+- method : GET
 - param :
    - dateStart
    - endStart
