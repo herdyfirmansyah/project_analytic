@@ -1,8 +1,4 @@
 <?php
- 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
 
 require 'vendor/autoload.php';
 
@@ -96,17 +92,28 @@ class GetAnalytic{
                 ]
             ),
             ],
-            'metrics' => [new Metric(
-                [
-                    'name' => 'totalUsers',
-                ]
-            )
+            'metrics' => [
+                new Metric(
+                    [
+                        'name' => 'screenPageViews' ,
+                    ]
+                ),
+                new Metric(
+                    [
+                        'name' => 'totalUsers',
+                    ]
+                ),
+                new Metric(
+                    [
+                        'name' => 'newUsers',
+                    ]
+                )
             ]
         ]) ;
 
         if($result == ""){
             $response=array(
-                'status' => 01,
+                'status' => "01",
                 'message' =>'Get Total User By Title Failed',
                 "count_data"=>0, 
                 'data' => array() 
@@ -115,14 +122,15 @@ class GetAnalytic{
             $data = array() ;
             $i = 0 ; 
             foreach ($result->getRows() as $row) {
-                $data[$i] = array(
-                    $row->getDimensionValues()[0]->getValue(),
-                    $row->getMetricValues()[0]->getValue()
-                ) ; 
+                $data[$i]['PageTitle'] = $row->getDimensionValues()[0]->getValue() ; 
+                $data[$i]['Views'] = $row->getMetricValues()[0]->getValue() ; 
+                $data[$i]['TotalUsers'] = $row->getMetricValues()[1]->getValue() ;
+                $data[$i]['NewUser'] = $row->getMetricValues()[2]->getValue() ;
+                $data[$i]['ViewsperPage'] = $this->avarageCount( $row->getMetricValues()[0]->getValue() , $row->getMetricValues()[1]->getValue() ) ; 
                 $i++ ; 
             }
             $response=array(
-                'status' => 00,
+                'status' => "00",
                 'message' =>'Get Total User by title Success',
                 "count_data"=>count($data), 
                 'data' => $data
@@ -150,17 +158,28 @@ class GetAnalytic{
                 ]
             ),
             ],
-            'metrics' => [new Metric(
-                [
-                    'name' => 'totalUsers',
-                ]
-            )
+            'metrics' => [
+                new Metric(
+                    [
+                        'name' => 'screenPageViews' ,
+                    ]
+                ),
+                new Metric(
+                    [
+                        'name' => 'totalUsers',
+                    ]
+                ),
+                new Metric(
+                    [
+                        'name' => 'newUsers',
+                    ]
+                )
             ]
         ]) ;
 
         if($result == ""){
             $response=array(
-                'status' => 01,
+                'status' => "01",
                 'message' =>'Get Total User By Page Path Failed',
                 "count_data"=>0, 
                 'data' => array() 
@@ -169,14 +188,15 @@ class GetAnalytic{
             $data = array() ;
             $i = 0 ; 
             foreach ($result->getRows() as $row) {
-                $data[$i] = array(
-                    $row->getDimensionValues()[0]->getValue(),
-                    $row->getMetricValues()[0]->getValue()
-                ) ; 
+                $data[$i]['pagePath'] = $row->getDimensionValues()[0]->getValue() ; 
+                $data[$i]['Views'] = $row->getMetricValues()[0]->getValue() ; 
+                $data[$i]['TotalUsers'] = $row->getMetricValues()[1]->getValue() ;
+                $data[$i]['NewUser'] = $row->getMetricValues()[2]->getValue() ;
+                $data[$i]['ViewsperPage'] = $this->avarageCount( $row->getMetricValues()[0]->getValue() , $row->getMetricValues()[1]->getValue() ) ; 
                 $i++ ; 
             }
             $response=array(
-                'status' => 00,
+                'status' => "00",
                 'message' =>'Get Total User By Page Path Success',
                 "count_data"=>count($data), 
                 'data' => $data
@@ -186,5 +206,10 @@ class GetAnalytic{
         header('Content-Type: application/json');
 		echo json_encode($response);
 	}
+
+    private function avarageCount($views , $users){
+        $userViewAvarage = round($views / $users , 2); 
+        return  $userViewAvarage ; 
+    }
 
 }
