@@ -13,7 +13,7 @@
 ## Endpoint
 
 - Get Visitor 
-- http://localhost/project_analytics/index.php/get_visitor 
+- http://localhost/project_analytic/index.php/get_visitor 
 - method : GET
 - param :
    - filter: country, city etc
@@ -22,7 +22,7 @@
 
 
 - Get Title 
-- http://localhost/project_analytics/index.php/get_title 
+- http://localhost/project_analytic/index.php/get_title 
 - method : GET
 - param :
    - dateStart 
@@ -30,8 +30,12 @@
 
 
 - Get Title   
-- http://localhost/project_analytics/index.php/get_path  
+- http://localhost/project_analytic/index.php/get_path  
 - method : GET
 - param :
    - dateStart
    - endStart
+
+## Documentation Google Query Explorer
+
+- https://ga-dev-tools.web.app/ga4/query-explorer/
