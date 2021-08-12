@@ -9,7 +9,7 @@ $request_url= $_SERVER['REQUEST_URI'];
 switch ($request_method) {
 	case 'GET':
             $uri_request = explode('?', $_SERVER['REQUEST_URI'], 2);
-            if($uri_request[0] == "/project_analytics/index.php/get_visitor"){
+            if($uri_request[0] == "/project_analytic/index.php/get_visitor"){
                 
                 if( empty($_GET['filter']) ){
                     $filter = "" ;
@@ -31,7 +31,7 @@ switch ($request_method) {
         
                 $GA->get_visitor($filter, $dateStart, $dateEnd);
 
-            }else if($uri_request[0] == "/project_analytics/index.php/get_title"){
+            }else if($uri_request[0] == "/project_analytic/index.php/get_title"){
 
                 if( empty($_GET['dateStart']) ){
                     $dateStart = date('Y-m-d') ;
@@ -47,7 +47,7 @@ switch ($request_method) {
             
                 $GA->get_visitor_title($dateStart, $dateEnd) ; 
 
-            }else if($uri_request[0] == "/project_analytics/index.php/get_path"){
+            }else if($uri_request[0] == "/project_analytic/index.php/get_path"){
 
                 if( empty($_GET['dateStart']) ){
                     $dateStart = date('Y-m-d') ;
